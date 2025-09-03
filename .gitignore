@@ -1,0 +1,37 @@
+# Byte-compiled / optimized / compiled files
+__pycache__/
+*.pyc
+*.pyd
+*.pyo
+*.egg-info/
+.pytest_cache/
+
+# Virtual environment
+venv/
+env/
+.env/
+
+# IDE-specific files
+.idea/  # PyCharm
+.vscode/ # VS Code
+*.iml   # IntelliJ
+
+# Database files
+*.sqlite3
+db.sqlite3
+
+# Media and static files (if not served by a CDN or external storage)
+media/     
+static/  # If you collect static files locally and don't want them in version control
+
+# Sensitive information/local settings
+local_settings.py
+settings_local.py
+.env  # Environment variables file
+
+# Log files
+*.log
+
+# Other common ignored files
+.DS_Store
+Thumbs.db
