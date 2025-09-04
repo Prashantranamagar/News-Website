@@ -129,9 +129,9 @@ def news_list(request):
             perm = 1
 
     if perm == 0:
-        news = News.objects.filter(writer=request.user)
+        news = News.objects.filter(writer=request.user).order_by("-id")
     elif perm == 1:
-        newss = News.objects.all()
+        newss = News.objects.all().order_by("-id")
         paginator = Paginator(newss, 10)
         page = request.GET.get("page")
 
