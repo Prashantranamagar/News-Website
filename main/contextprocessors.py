@@ -12,6 +12,7 @@ def all(request):
     subcat = SubCat.objects.all()
     popnews = News.objects.filter(act=1).order_by("-show")
     popnews2 = News.objects.filter(act=1).order_by("-show")[:3]
+    latest_news = News.objects.filter(act=1).order_by("-pk")[:3]
     context = {
         "site": site,
         "news": news,
@@ -19,5 +20,7 @@ def all(request):
         "popnews2": popnews2,
         "popnews": popnews,
         "subcat": subcat,
+        "latest_news": latest_news,
+
     }
     return context
