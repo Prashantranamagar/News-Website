@@ -132,7 +132,7 @@ def news_list(request):
         news = News.objects.filter(writer=request.user)
     elif perm == 1:
         newss = News.objects.all()
-        paginator = Paginator(newss, 1)
+        paginator = Paginator(newss, 10)
         page = request.GET.get("page")
 
         try:
