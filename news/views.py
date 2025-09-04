@@ -41,7 +41,7 @@ def news_detail(request, category, word):
 
         print("Can't Add Show")
 
-    code = News.objects.get(e=word).pk
+    code = News.objects.get(name=word).id
     comment = Comment.objects.filter(news_id=code, status=1).order_by("-pk")[:3]
     cmcount = len(comment)
 
