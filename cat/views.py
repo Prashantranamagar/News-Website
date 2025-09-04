@@ -106,11 +106,10 @@ from cat.models import Cat
 
 def category_page(request, category):
     # You can also fetch category-specific news here
-    site = Main.objects.get(pk=2)
     print(f"****************** {category} **********************")
     category_id = Cat.objects.get(name=category).id
     popular_news = News.objects.filter(ocatid=category_id).order_by("-id")[:5]
-    all_news = News.objects.filter(catname=category_id).order_by("-id")
+    all_news = News.objects.filter(ocatid=category_id).order_by("-id")
     print(f"****************** {len(popular_news)} **********************")
     # Pagination
     paginator = Paginator(all_news, 4)  # 5 news items per page
@@ -123,7 +122,6 @@ def category_page(request, category):
     except EmptyPage:
         news_list = paginator.page(paginator.num_pages)
     context = {
-        "site": site,
         "category": category,
         "news_list": news_list,  # example if you have a News model
         "popular_news": popular_news,
