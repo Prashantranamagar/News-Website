@@ -343,12 +343,15 @@ def news_edit(request, pk):
             fs = FileSystemStorage()
             filename = fs.save(myfile.name, myfile)
             url = fs.url(filename)
+            print(f"********** Ocatid:")
 
             if str(myfile.content_type).startswith("image"):
 
                 if myfile.size < 5000000:
 
                     newsname = SubCat.objects.get(pk=newsid).name
+                    ocatid = SubCat.objects.get(pk=newsid).catid
+                    print(f"********** Ocatid: {ocatid}")
 
                     b = News.objects.get(pk=pk)
 
@@ -362,6 +365,8 @@ def news_edit(request, pk):
                     b.picurl = url
                     b.catname = newsname
                     b.catid = newsid
+                    ocatid = (ocatid,)
+
                     b.tag = tag
                     b.act = 0
 
@@ -397,6 +402,9 @@ def news_edit(request, pk):
             b.catname = newsname
             b.catid = newsid
             b.tag = tag
+            ocatid = SubCat.objects.get(pk=newsid).catid
+            print(f"********** Ocatid: {ocatid}")
+            b.ocatid = ocatid
 
             b.save()
 
