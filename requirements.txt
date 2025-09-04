@@ -86,3 +86,4 @@ zipp==3.22.0
 django-crontab
 django-crispy-forms
 django-qr-code
+xlwt    
