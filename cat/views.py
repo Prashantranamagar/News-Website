@@ -101,14 +101,16 @@ def import_cat_csv(request):
 
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from cat.models import Cat
 
 
 def category_page(request, category):
     # You can also fetch category-specific news here
     site = Main.objects.get(pk=2)
     print(f"****************** {category} **********************")
-    popular_news = News.objects.filter(catname=category).order_by("-id")[:5]
-    all_news = News.objects.filter(catname=category).order_by("-id")
+    category_id = Cat.objects.get(name=category).id
+    popular_news = News.objects.filter(ocatid=category_id).order_by("-id")[:5]
+    all_news = News.objects.filter(catname=category_id).order_by("-id")
     print(f"****************** {len(popular_news)} **********************")
     # Pagination
     paginator = Paginator(all_news, 4)  # 5 news items per page
