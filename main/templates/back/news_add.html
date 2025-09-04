@@ -40,71 +40,7 @@
                 <!-- END Form Elements Title -->
 
                 <!-- Basic Form Elements Content -->
-                <!-- <form action="{%url 'news_add' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" >
-                    {% csrf_token %}
-                    <div class="form-group">
-                            <div class="col-md-6">
-                                <input type="text" id="newstitle" name="newstitle" class="form-control" placeholder="News Title">
-                            </div>
-                            <div class="col-md-6">
-                            
-                                    <select id="newscat" name="newscat" class="select-chosen" data-placeholder="Choose a Category..." style="width: 250px;">
-                                         
-                                            {% for i in cat %}
-                                            <option value="{{i.pk}}">{{i.catname}} | {{i.name}}</option>
-                                            {% endfor %}
-                                          
-                                           
-                                        </select>
-
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                                <div class="col-md-12">
-                                    <textarea type="text" id="newstxtshort" name="newstxtshort" rows="5" class="form-control" placeholder="Short txt">Short Txt</textarea>
-                                </div>
-                              
-                            </div>
-
-                            <script>
-                                    CKEDITOR.replace( 'newstxtshort' );
-                                </script>
-
-
-                            <div class="form-group">
-                                    <div class="col-md-12">
-                                        <textarea type="text" id="newstxt" name="newstxt" rows="5" class="form-control" placeholder="Body txt">Body Txt</textarea>
-                                    </div>
-                                  
-                                </div>
-
-                                <script>
-                                    CKEDITOR.replace( 'newstxt' );
-                                </script>
-
-
-                                <div class="form-group">
-                                        <div class="col-md-6">
-                                            <input type="file" id="myfile" name="myfile" rows="5" class="form-control" placeholder="Body txt">
-                                        </div>
-
-                                        <div class="col-md-6">
-                                                <textarea type="text" id="tag" name="tag" rows="5" class="form-control" placeholder="Tags"></textarea>
-                                            </div>
-                                      
-                                    </div>
-
-
-                                <div class="form-group">
-                                        <div class="col-md-12">
-                                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
-                                            </div>
-                                      
-                                    </div>
-                  
-                </form> -->
-
+                
 
                 <form action="{% url 'news_add' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
                     {% csrf_token %}
