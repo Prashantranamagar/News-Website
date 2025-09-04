@@ -177,105 +177,82 @@
 		<div class="row justify-content-center">
 			<div class="col-md-12 col-lg-12">
 				<div class="p-r-10 p-rl-0-sr991 p-b-20">
-					
-						{% for newscat in cat %}
-						{% if newscat.count != 0 %}
-					
-					<!-- Life Style  -->
-					<div class="p-b-25 m-r--10 m-r-0-sr991">
-						<div class="how2 how2-cl5 flex-s-c m-r-10 m-r-0-sr991">
-							<h3 class="f1-m-2 cl17 tab01-title">
-								{{newscat.name}}
-							</h3>
-						</div>
-
-						<div class="row p-t-35">
-							<div class="col-sm-6 p-r-25 p-r-15-sr991">
-								<!-- Item post -->	
-
-								{% for ab in news %}
-								{% if newscat.pk == ab.ocatid %}
-								<div class="flex-wr-sb-s m-b-30">
-									<a href="{%url 'news_detail' category=ab.catname word=ab.name %}" class="size-w-1 wrap-pic-w hov1 trans-03">
-										<img src="{{ab.picurl}}" alt="IMG">
-									</a>
-
-									<div class="size-w-2">
-										<h5 class="p-b-5">
-											<a href="{%url 'news_detail' category=ab.catname word=ab.name %}" class="f1-s-5 cl3 hov-cl10 trans-03">
-												{{ab.name}}
-											</a>
-										</h5>
-
-										<span class="cl8">
-											<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-												{{ab.catname}}
-											</a>
-
-											<span class="f1-s-3 m-rl-3">
-												-
-											</span>
-
-											<span class="f1-s-3">
-												{{ab.date}} | {{ab.time}}
-											</span>
-										</span>
-									</div>
+					{% for category, news_list in cat_with_news %}
+						{% if news_list %}
+						<div class="p-b-25 m-r--10 m-r-0-sr991">
+							<div class="how2 how2-cl5 flex-s-c m-r-10 m-r-0-sr991">
+								<h3 class="f1-m-2 cl17 tab01-title">{{ category.name }}</h3>
+							</div>
+				
+							<div class="row p-t-35">
+								<div class="col-sm-6 p-r-25 p-r-15-sr991">
+									{% for ab in news_list %}
+										{% if forloop.counter|divisibleby:2 == False %}
+											<!-- Odd items go to left -->
+											<div class="flex-wr-sb-s m-b-30">
+												<a href="{% url 'news_detail' category=ab.catname word=ab.name %}" class="size-w-1 wrap-pic-w hov1 trans-03">
+													<img src="{{ ab.picurl }}" alt="IMG">
+												</a>
+												<div class="size-w-2">
+													<h5 class="p-b-5">
+														<a href="{% url 'news_detail' category=ab.catname word=ab.name %}" class="f1-s-5 cl3 hov-cl10 trans-03">{{ ab.name }}</a>
+													</h5>
+													<span class="cl8">
+														<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">{{ ab.catname }}</a>
+														<span class="f1-s-3 m-rl-3">-</span>
+														<span class="f1-s-3">{{ ab.date }} | {{ ab.time }}</span>
+													</span>
+												</div>
+											</div>
+										{% endif %}
+									{% endfor %}
 								</div>
-								{% endif %}
-								{% endfor %}
-								
-							
-
-							
+				
+								<div class="col-sm-6 p-r-25 p-r-15-sr991">
+									{% for ab in news_list %}
+										{% if forloop.counter|divisibleby:2 %}
+											<!-- Even items go to right -->
+											<div class="flex-wr-sb-s m-b-30">
+												<a href="{% url 'news_detail' category=ab.catname word=ab.name %}" class="size-w-1 wrap-pic-w hov1 trans-03">
+													<img src="{{ ab.picurl }}" alt="IMG">
+												</a>
+												<div class="size-w-2">
+													<h5 class="p-b-5">
+														<a href="{% url 'news_detail' category=ab.catname word=ab.name %}" class="f1-s-5 cl3 hov-cl10 trans-03">{{ ab.name }}</a>
+													</h5>
+													<span class="cl8">
+														<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">{{ ab.catname }}</a>
+														<span class="f1-s-3 m-rl-3">-</span>
+														<span class="f1-s-3">{{ ab.date }} | {{ ab.time }}</span>
+													</span>
+												</div>
+											</div>
+										{% endif %}
+									{% endfor %}
+								</div>
+							</div>
+							<!-- See More Button on the left side -->
+							<!-- Minimal modern See More button -->
+							 
+							<!-- Minimal modern See More button (inline style) -->
+							<!-- Minimal text-only See More button -->
+							<div class="p-t-10">
+								<a href="{% url 'category' category.name %}" 
+								style="color: #00B5E9; font-weight: 500; font-size: 14px; 
+										text-decoration: none;">
+									See More &gt; &gt;
+								</a>
 							</div>
 
-							<div class="col-sm-6 p-r-25 p-r-15-sr991">
-								<!-- Item post -->	
+							<!-- End of See More Button -->
 
-								{% for pop in popnews %}
-								{% if pop.ocatid == newscat.pk %}
-								{% if pop.show != 0 %}
-								<div class="flex-wr-sb-s m-b-30">
-									<a href="{%url 'news_detail' category=pop.catname word=pop.name %}" class="size-w-1 wrap-pic-w hov1 trans-03">
-										<img src="{{pop.picurl}}" alt="IMG">
-									</a>
-
-									<div class="size-w-2">
-										<h5 class="p-b-5">
-											<a href="{%url 'news_detail' category=pop.catname word=pop.name %}" class="f1-s-5 cl3 hov-cl10 trans-03">
-												{{pop.name}}
-											</a>
-										</h5>
-
-										<span class="cl8">
-											<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-												{{pop.catname}}
-											</a>
-
-											<span class="f1-s-3 m-rl-3">
-												-
-											</span>
-
-											<span class="f1-s-3">
-												{{pop.date}}
-											</span>
-										</span>
-									</div>
-								</div>
-								{% endif %}
-								{% endif %}
-								{% endfor %}
-
-						
-
-							</div>
 						</div>
-					</div>
-					{% endif %}
+						{% endif %}
 					{% endfor %}
-
 				</div>
+
+				
+				
 			</div>
 
 		
@@ -302,7 +279,7 @@
 
 		<div class="row p-t-35">
 
-			{% for i in news %}
+			{% for i in latest_news %}
 			<div class="col-sm-6 col-md-4">
 				<!-- Item latest -->	
 				<div class="m-b-45">
