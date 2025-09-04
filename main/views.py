@@ -29,7 +29,11 @@ def home(request):
     popnews2 = News.objects.filter(act=1).order_by("-show")[:3]
     trending = Trending.objects.all().order_by("-pk")[:5]
     lastnews2 = News.objects.filter(act=1).order_by("-pk")[:4]
+    cat_with_news = []
 
+    for category in cat:
+        related_news = list(news.filter(ocatid=category.id)[:4])
+        cat_with_news.append((category, related_news))
     return render(
         request,
         "front/home.html",
@@ -43,6 +47,7 @@ def home(request):
             "popnews2": popnews2,
             "trending": trending,
             "lastnews2": lastnews2,
+            "cat_with_news": cat_with_news,
         },
     )
 
