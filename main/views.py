@@ -22,7 +22,7 @@ def home(request):
 
     site = Main.objects.get(pk=2)
     news = News.objects.filter(act=1).order_by("-pk")
-    cat = Cat.objects.all()[:3]
+    cat = Cat.objects.all()[:6]
     subcat = SubCat.objects.all()
     lastnews = News.objects.filter(act=1).order_by("-pk")[:3]
     popnews = News.objects.filter(act=1).order_by("-show")
