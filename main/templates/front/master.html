@@ -127,119 +127,92 @@
 							{% for gg in cat %}
 							{% if gg.count != 0 %}
 							<li class="mega-menu-item">
-								<a href="{% url 'category' category=gg.name %}">{{gg.name}}</a>
+								<a href="{% url 'category' category=gg.name %}">{{ gg.name }}</a>
 
 								<div class="sub-mega-menu">
+									<!-- Navigation Pills -->
 									<div class="nav flex-column nav-pills" role="tablist">
-										<a class="nav-link active" data-toggle="pill" href="#news-0" role="tab">All</a>
+										<a class="nav-link active" data-toggle="pill" href="#news-{{gg.pk}}" role="tab">All</a>
 
 										{% for subcat in subcat %}
-										{% if subcat.catid == gg.pk %}
-										<a class="nav-link" data-toggle="pill" href="#{{subcat.pk}}" role="tab">{{subcat.name}}</a>
-										{% endif %}
+											{% if subcat.catid == gg.pk %}
+												<a class="nav-link" data-toggle="pill" href="#subcat-{{subcat.pk}}" role="tab">
+													{{ subcat.name }}
+												</a>
+											{% endif %}
 										{% endfor %}
-									
 									</div>
 
+									<!-- Tab Content -->
 									<div class="tab-content">
 
-										<div class="tab-pane show active" id="news-0" role="tabpanel">
+										<!-- All News Tab -->
+										<div class="tab-pane show active" id="news-{{gg.pk}}" role="tabpanel">
 											<div class="row">
-
-
 												{% for hh in news %}
-												{% if hh.ocatid == gg.pk %}
-												<div class="col-3">
-													<!-- Item post -->	
-													<div>
-														<a href="{%url 'news_detail' category=hh.catname word=hh.name %}" class="wrap-pic-w hov1 trans-03">
-															<img style="display: inline-block; width:180px; height:120px;" src="{{hh.picurl}}" alt="IMG">
-														</a>
-
-														<div class="p-t-10">
-															<h5 class="p-b-5">
-																<a href="#" class="f1-s-5 cl3 hov-cl10 trans-03">
-																	{{hh.name}}
-																</a>
-															</h5>
-
-															<span class="cl8">
-																<a href="{%url 'news_detail' category=hh.catname word=hh.name %}" class="f1-s-6 cl8 hov-cl10 trans-03">
-																	{{hh.catname}}
-																</a>
-
-																<span class="f1-s-3 m-rl-3">
-																	-
+													{% if hh.ocatid == gg.pk %}
+													<div class="col-3">
+														<div>
+															<a href="{% url 'news_detail' category=hh.catname word=hh.name %}" class="wrap-pic-w hov1 trans-03">
+																<img style="width:180px; height:120px;" src="{{hh.picurl}}" alt="IMG">
+															</a>
+															<div class="p-t-10">
+																<h5 class="p-b-5">
+																	<a href="#" class="f1-s-5 cl3 hov-cl10 trans-03">{{ hh.name }}</a>
+																</h5>
+																<span class="cl8">
+																	<a href="{% url 'news_detail' category=hh.catname word=hh.name %}" class="f1-s-6 cl8 hov-cl10 trans-03">
+																		{{ hh.catname }}
+																	</a>
+																	<span class="f1-s-3 m-rl-3">-</span>
+																	<span class="f1-s-3">{{ hh.date }}</span>
 																</span>
-
-																<span class="f1-s-3">
-																	{{hh.date}}
-																</span>
-															</span>
+															</div>
 														</div>
 													</div>
-												</div>
-												{% endif %}
+													{% endif %}
 												{% endfor %}
-
-												
 											</div>
 										</div>
 
-
+										<!-- Subcategory Tabs -->
 										{% for subcat2 in subcat %}
-										<div class="tab-pane" id="{{subcat2.pk}}" role="tabpanel">
-											<div class="row">
-
-
-
-												{% for hh in news %}
-												{% if hh.catid == subcat2.pk %}
-												<div class="col-3">
-													<!-- Item post -->	
-													<div>
-														<a href="{%url 'news_detail' category=hh.catname word=hh.name %}"" class="wrap-pic-w hov1 trans-03">
-															<img style="display: inline-block; width:180px; height:120px;" src="{{hh.picurl}}" alt="IMG">
-														</a>
-
-														<div class="p-t-10">
-															<h5 class="p-b-5">
-																<a href="#" class="f1-s-5 cl3 hov-cl10 trans-03">
-																	{{hh.name}}
+											{% if subcat2.catid == gg.pk %}
+											<div class="tab-pane" id="subcat-{{subcat2.pk}}" role="tabpanel">
+												<div class="row">
+													{% for hh in news %}
+														{% if hh.catid == subcat2.pk %}
+														<div class="col-3">
+															<div>
+																<a href="{% url 'news_detail' category=hh.catname word=hh.name %}" class="wrap-pic-w hov1 trans-03">
+																	<img style="width:180px; height:120px;" src="{{hh.picurl}}" alt="IMG">
 																</a>
-															</h5>
-
-															<span class="cl8">
-																<a href="{%url 'news_detail' category=hh.catname word=hh.name %}" class="f1-s-6 cl8 hov-cl10 trans-03">
-																	{{hh.catname}}
-																</a>
-
-																<span class="f1-s-3 m-rl-3">
-																	-
-																</span>
-
-																<span class="f1-s-3">
-																	{{hh.date}}
-																</span>
-															</span>
+																<div class="p-t-10">
+																	<h5 class="p-b-5">
+																		<a href="#" class="f1-s-5 cl3 hov-cl10 trans-03">{{ hh.name }}</a>
+																	</h5>
+																	<span class="cl8">
+																		<a href="{% url 'news_detail' category=hh.catname word=hh.name %}" class="f1-s-6 cl8 hov-cl10 trans-03">
+																			{{ hh.catname }}
+																		</a>
+																		<span class="f1-s-3 m-rl-3">-</span>
+																		<span class="f1-s-3">{{ hh.date }}</span>
+																	</span>
+																</div>
+															</div>
 														</div>
-													</div>
+														{% endif %}
+													{% endfor %}
 												</div>
-												{% endif %}
-												{% endfor %}
-
-												
 											</div>
-										</div>
+											{% endif %}
 										{% endfor %}
 
-									
-									
 									</div>
 								</div>
 							</li>
 							{% endif %}
-							{% endfor %}
+						{% endfor %}
 
 							
 						</ul>
@@ -362,6 +335,9 @@
 							{% endif %}
 							{% endfor %}
 
+							
+
+
 						</ul>
 
 
@@ -374,12 +350,12 @@
 		<div class="bg11">
 			<div class="container size-h-4 flex-c-c p-tb-15">
 				<span class="f1-s-1 cl0 txt-center">
-					Copyright © 2019 
 
-					<a href="/" class="f1-s-1 cl10 hov-link1"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="{{site.link}}" target="_blank">My Team</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-				</span>
+					<a href="/" class="f1-s-1 cl10 hov-link1">
+						All rights reserved | © 2022 
+						<a href="/" target="_blank">Kiros Sambad</a> 
+						| Designed & Developed by <a href="{{site.link}}" target="_blank">My Team</a>
+					</a>
 			</div>
 		</div>
 	</footer>
